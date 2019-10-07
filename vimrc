@@ -3,10 +3,10 @@ execute pathogen#infect()
 
 set number
 set nowrap
-set background=dark
 set cursorline
+set background=dark
 
-let g:solarized_termcolor=256
+let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 color solarized
 
