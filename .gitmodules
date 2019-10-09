@@ -13,6 +13,3 @@
 [submodule "vim/bundle/nerdtree"]
 	path = vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
-[submodule "vim/bundle/doxygen-support.vim"]
-	path = vim/bundle/doxygen-support.vim
-	url = https://github.com/vim-scripts/doxygen-support.vim
