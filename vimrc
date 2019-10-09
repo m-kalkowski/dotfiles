@@ -17,6 +17,9 @@ set background=dark
 
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
+
+unlet g:c_comment_strings
+
 color solarized
 
 let g:airline_theme='base16'
