@@ -16,7 +16,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'ycm-core/YouCompleteMe'
-
+Plugin 'bogado/file-line'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -40,6 +40,8 @@ set tabstop=4
 set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
+
+set bs=2
 
 set number
 set nowrap
