@@ -1,52 +1,90 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" plugins
+let need_to_install_plugins = 0
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    let need_to_install_plugins = 1
+endif
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+call plug#begin()
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+Plug 'vim-scripts/DoxygenToolkit.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'preservim/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'ycm-core/YouCompleteMe'
+Plug 'bogado/file-line'
 
-Plugin 'vim-scripts/DoxygenToolkit.vim'
-Plugin 'preservim/nerdtree'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'ycm-core/YouCompleteMe'
-Plugin 'bogado/file-line'
+call plug#end()
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
+filetype plugin indent on
 syntax on
 
-set tabstop=4
-" when indenting with '>', use 4 spaces width
-set shiftwidth=4
-" On pressing tab, insert 4 spaces
-set expandtab
+if need_to_install_plugins == 1
+    echo "Installing plugins..."
+    silent! PlugInstall
+    echo "Done!"
+    q
+endif
 
-set bs=2
-
+" turn on line numbering
 set number
+
+" sane text files
+set fileformat=unix
+set encoding=utf-8
+set fileencoding=utf-8
+
+" sane editing
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 set nowrap
 set cursorline
 set background=dark
+set colorcolumn=80
+set expandtab
+set viminfo='25,\"50,n~/.viminfo
+autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType css setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
+
+" auto-pairs
+au FileType python let b:AutoPairs = AutoPairsDefine({"f'" : "'", "r'" : "'", "b'" : "'"})
+
+" word movement
+imap <S-Left> <Esc>bi
+nmap <S-Left> b
+imap <S-Right> <Esc><Right>wi
+nmap <S-Right> w
+
+" indent/unindent with tab/shift-tab
+nmap <Tab> >>
+nmap <S-tab> <<
+imap <S-Tab> <Esc><<i
+vmap <Tab> >gv
+vmap <S-Tab> <gv
+
+" mouse
+set mouse=a
+let g:is_mouse_enabled = 1
+noremap <silent> <Leader>m :call ToggleMouse()<CR>
+function ToggleMouse()
+    if g:is_mouse_enabled == 1
+        echo "Mouse OFF"
+        set mouse=
+        let g:is_mouse_enabled = 0
+    else
+        echo "Mouse ON"
+        set mouse=a
+        let g:is_mouse_enabled = 1
+    endif
+endfunction
 
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
@@ -58,3 +96,9 @@ let g:airline_theme='base16'
 nmap <C-e> :NERDTreeToggle<CR>
 nmap <C-Right> <C-w>l 
 nmap <C-Left>  <C-w>h
+
+" copy, cut and paste
+vmap <C-c> "+y
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+imap <C-v> <ESC>"+pa
