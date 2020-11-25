@@ -19,6 +19,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'ycm-core/YouCompleteMe'
 Plug 'bogado/file-line'
+Plug 'davidhalter/jedi-vim'
 
 call plug#end()
 
@@ -35,11 +36,6 @@ endif
 " turn on line numbering
 set number
 
-" sane text files
-set fileformat=unix
-set encoding=utf-8
-set fileencoding=utf-8
-
 " sane editing
 set tabstop=4
 set shiftwidth=4
@@ -47,15 +43,7 @@ set softtabstop=4
 set nowrap
 set cursorline
 set background=dark
-set colorcolumn=80
 set expandtab
-set viminfo='25,\"50,n~/.viminfo
-autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd FileType css setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
-
-" auto-pairs
-au FileType python let b:AutoPairs = AutoPairsDefine({"f'" : "'", "r'" : "'", "b'" : "'"})
 
 " word movement
 imap <S-Left> <Esc>bi
@@ -93,12 +81,9 @@ color solarized
 
 let g:airline_theme='base16'
 
+let NERDTreeShowHidden=1
+
 nmap <C-e> :NERDTreeToggle<CR>
 nmap <C-Right> <C-w>l 
 nmap <C-Left>  <C-w>h
 
-" copy, cut and paste
-vmap <C-c> "+y
-vmap <C-x> "+c
-vmap <C-v> c<ESC>"+p
-imap <C-v> <ESC>"+pa
