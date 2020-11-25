@@ -44,19 +44,7 @@ set nowrap
 set cursorline
 set background=dark
 set expandtab
-
-" word movement
-imap <S-Left> <Esc>bi
-nmap <S-Left> b
-imap <S-Right> <Esc><Right>wi
-nmap <S-Right> w
-
-" indent/unindent with tab/shift-tab
-nmap <Tab> >>
-nmap <S-tab> <<
-imap <S-Tab> <Esc><<i
-vmap <Tab> >gv
-vmap <S-Tab> <gv
+set backspace=indent,eol,start
 
 " mouse
 set mouse=a
